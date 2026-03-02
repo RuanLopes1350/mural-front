@@ -1,0 +1,45 @@
+{
+  "error": false,
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "_id": "evt-001",
+      "titulo": "Mostra de Robotica",
+      "descricao": "Exposicao com os prototipos desenvolvidos pelos estudantes.",
+      "local": "Hall Principal",
+      "dataInicio": "2025-12-20T12:00:00.000Z",
+      "dataFim": "2025-12-20T15:00:00.000Z",
+      "midia": [
+        { "midiTipo": "imagem", "midiLink": "https://via.placeholder.com/1600x900?text=Evento+1+A" },
+        { "midiTipo": "imagem", "midiLink": "https://via.placeholder.com/1600x900?text=Evento+1+B" }
+      ],
+      "cor": 4,
+      "animacao": 2,
+      "categoria": "Tecnologia",
+      "tags": ["Robotica", "Prototipos"],
+      "link": "https://ifro.edu.br/mostra-robotica",
+      "duracao": 2000,
+      "loops": 2
+    },
+    {
+      "_id": "evt-002",
+      "titulo": "Feira de Agronegocio",
+      "descricao": "Paineis e oficinas voltadas ao agronegocio regional.",
+      "local": "Auditório Central",
+      "dataInicio": "2025-12-22T14:00:00.000Z",
+      "dataFim": "2025-12-22T17:30:00.000Z",
+      "midia": [
+        { "midiTipo": "imagem", "midiLink": "https://via.placeholder.com/1600x900?text=Evento+2" }
+      ],
+      "cor": 5,
+      "animacao": 4,
+      "categoria": "Agronegocio",
+      "tags": ["agro", "negocios"],
+      "link": "https://ifro.edu.br/feira-agro",
+      "duracao": 3000,
+      "loops": 1
+    }
+  ],
+  "errors": []
+}

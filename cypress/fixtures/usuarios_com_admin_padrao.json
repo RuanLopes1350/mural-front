@@ -1,0 +1,35 @@
+{
+  "error": false,
+  "code": 200,
+  "message": "OK",
+  "data": [
+    {
+      "_id": "670000000000000000000001",
+      "nome": "Usuario Teste 1",
+      "email": "teste1@email.com",
+      "status": "ativo",
+      "admin": false,
+      "createdAt": "2024-01-01T10:00:00.000Z",
+      "updatedAt": "2024-01-01T10:00:00.000Z"
+    },
+    {
+      "_id": "670000000000000000000002",
+      "nome": "Admin Padrão",
+      "email": "adminpadrao@ifro.edu.br",
+      "status": "ativo",
+      "admin": true,
+      "createdAt": "2024-01-02T10:00:00.000Z",
+      "updatedAt": "2024-01-02T10:00:00.000Z"
+    },
+    {
+      "_id": "670000000000000000000003",
+      "nome": "Usuario Admin",
+      "email": "admin@email.com",
+      "status": "ativo",
+      "admin": true,
+      "createdAt": "2024-01-03T10:00:00.000Z",
+      "updatedAt": "2024-01-03T10:00:00.000Z"
+    }
+  ],
+  "errors": []
+}

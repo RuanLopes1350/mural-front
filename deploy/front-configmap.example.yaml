@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eventos-front-env
+  labels:
+    io.kompose.service: eventos-front
+
+data:
+  # Environment
+  NODE_ENV: "production"
+  
+  # API URLs
+  # Server side (comunicação interna entre pods)
+  API_URL_SERVER_SIDED: "http://api-ifroevents:80"
+  
+  # Client-side (chamadas do navegador - URL pública)
+  NEXT_PUBLIC_API_URL: "https://<YOUR_API_DOMAIN>"
+  
+  # NextAuth Configuration
+  NEXTAUTH_URL: "https://<YOUR_FRONTEND_DOMAIN>"
+  AUTH_TRUST_HOST: "true"
+  
+  # GERAR EM PRODUÇÃO: openssl rand -base64 48
+  NEXTAUTH_SECRET: "<REPLACE_WITH_SECURE_VALUE>"
+  
+  # Ambiente
+  NEXT_PUBLIC_AMBIENTE: "production"

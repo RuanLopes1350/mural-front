@@ -1,0 +1,9 @@
+{
+  "statusCode": 200,
+  "message": "QR code gerado",
+  "data": {
+    "evento": "evt-001",
+    "linkInscricao": "https://ifro.edu.br/mostra-robotica",
+    "qrcode": "data:image/png;base64,UElDS1NFVEFMSU5F"
+  }
+}

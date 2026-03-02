@@ -1,0 +1,14 @@
+{
+  "admin": {
+    "email": "admin@admin.com",
+    "senha": "SenhaSuperSegur@123",
+    "nome": "Administrador",
+    "admin": true
+  },
+  "usuario": {
+    "email": "usuario@teste.com",
+    "senha": "Usuario@123",
+    "nome": "Usuário Teste",
+    "admin": false
+  }
+}
