@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
@@ -59,6 +59,13 @@ export default function CriarEvento() {
   const imageDragDrop = useImageDragDrop(handleFilesChange);
   const { openPreview, closePreview } = usePreviewWindow();
 
+  // Limpar dados do localStorage ao sair da página (unmount)
+  useEffect(() => {
+    return () => {
+      clearStorage();
+    };
+  }, []);
+
   const handleContinue = async (e?: React.MouseEvent) => {
     e?.preventDefault();
     const isValid = await validateStep(step);
@@ -107,20 +114,6 @@ export default function CriarEvento() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl" data-test="criar-evento-page">
-      {step > 1 && (
-        <div className="mb-8 flex items-center gap-4">
-          <Button
-            onClick={handleBack}
-            data-test="btn-voltar"
-            className="flex items-center gap-2 text-[#805AD5] hover:text-[#6B46C1] bg-transparent hover:bg-purple-50 border-none shadow-none"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Voltar
-          </Button>
-        </div>
-      )}
 
       <div>
         <h1 className="text-3xl font-bold text-[#1A202C] mb-2">Criar Novo Evento</h1>
@@ -165,7 +158,7 @@ export default function CriarEvento() {
                 onClick={handleCancel}
                 disabled={loading}
                 data-test="btn-cancelar"
-                className="w-full sm:w-auto px-6 py-3 bg-white border border-[#CBD5E0] text-[#4A5568] rounded-lg hover:bg-[#F7FAFC] transition-colors font-medium order-2 sm:order-1"
+                className="w-full sm:w-auto px-6 py-3 bg-white border border-[#CBD5E0] text-[#4A5568] rounded-lg hover:bg-[#F7FAFC] transition-colors font-medium order-2 sm:order-1 cursor-pointer"
               >
                 Cancelar
               </Button>
@@ -177,7 +170,7 @@ export default function CriarEvento() {
                     onClick={async () => await openPreview(blobUrls)}
                     disabled={loading || validImages.length === 0}
                     data-test="btn-preview"
-                    className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mr-6"
                     title={validImages.length === 0 ? "Adicione imagens para visualizar o preview" : "Ver preview do evento"}
                   >
                     <svg className="cursor-pointer transition w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,26 +181,45 @@ export default function CriarEvento() {
                   </Button>
                 )}
 
-                {step < 3 ? (
-                  <Button
-                    type="button"
-                    onClick={handleContinue}
-                    disabled={loading}
-                    data-test="btn-continuar"
-                    className="w-full sm:w-auto px-8 py-3 bg-[#805AD5] hover:bg-[#6B46C1] text-white rounded-lg transition-colors font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    Continuar
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    data-test="btn-finalizar"
-                    className="w-full sm:w-auto px-8 py-3 bg-[#805AD5] hover:bg-[#6B46C1] text-white rounded-lg transition-colors font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {loading ? "Carregando..." : "Finalizar"}
-                  </Button>
-                )}
+                <div className="flex flex-row gap-2">
+                  {step > 1 && (
+                    <div className="flex items-center gap-4">
+                      <Button
+                        onClick={handleBack}
+                        data-test="btn-voltar"
+                        className="w-full sm:w-auto px-6 py-3 bg-white border border-[#CBD5E0] text-[#4A5568] rounded-lg hover:bg-[#F7FAFC] transition-colors font-medium order-2 sm:order-1 cursor-pointer"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Voltar
+                      </Button>
+                    </div>
+                  )}
+
+                  {step < 3 ? (
+                    <Button
+                      type="button"
+                      onClick={handleContinue}
+                      disabled={loading}
+                      data-test="btn-continuar"
+                      className="w-full sm:w-auto px-8 py-3 bg-[#805AD5] hover:bg-[#6B46C1] text-white rounded-lg transition-colors font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      Continuar
+                    </Button>
+                  ) : (
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      data-test="btn-finalizar"
+                      className="w-full sm:w-auto px-8 py-3 bg-[#805AD5] hover:bg-[#6B46C1] text-white rounded-lg transition-colors font-medium shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      {loading ? "Carregando..." : "Finalizar"}
+                    </Button>
+                  )}
+                </div>
+
+
               </div>
             </div>
           </form>
@@ -226,17 +238,17 @@ export default function CriarEvento() {
           Os dados preenchidos serão perdidos. Tem certeza que deseja cancelar?
         </p>
         <div className="flex justify-end gap-3 mt-6">
-          <button 
-            onClick={() => setShowCancelModal(false)} 
+          <button
+            onClick={() => setShowCancelModal(false)}
             data-test="modal-btn-voltar"
-            className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+            className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium cursor-pointer"
           >
             Voltar
           </button>
-          <button 
-            onClick={confirmCancel} 
+          <button
+            onClick={confirmCancel}
             data-test="modal-btn-confirmar-cancelar"
-            className="px-6 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
+            className="px-6 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium cursor-pointer"
           >
             Sim, cancelar
           </button>

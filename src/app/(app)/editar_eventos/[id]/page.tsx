@@ -74,6 +74,15 @@ function EditarEventoContent() {
 
   const imageDragDrop = useImageDragDrop(handleFilesChange);
 
+  // Limpar dados do localStorage ao sair da página (unmount)
+  useEffect(() => {
+    return () => {
+      closePreview();
+      localStorage.removeItem('criar_evento_draft');
+      localStorage.removeItem('criar-evento-images');
+    };
+  }, []);
+
   // Carregar usuários compartilhados quando os dados do evento chegarem
   useEffect(() => {
     if (eventoData?.data?.permissoes && Array.isArray(eventoData.data.permissoes)) {
