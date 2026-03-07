@@ -15,7 +15,7 @@ export default function Header() {
                 {/* Logo */}
                 <Link href='/meus_eventos' className="flex items-center shrink-0">
                     <img
-                        src="/ifro-events-icon.svg"
+                        src="/mural.png"
                         className="h-8 sm:h-10 md:h-12 selection:bg-none cursor-pointer"
                         draggable="false"
                         alt="IFRO Events"
