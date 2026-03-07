@@ -33,8 +33,8 @@ export default function LoginPage() {
       <div className="bg-white rounded-lg shadow-xl pb-6 pl-6 pr-6 space-y-4" data-test="login-card">
 
         <img
-          src="/ifro-events-icon.svg"
-          alt="Ifro Events"
+          src="/mural-logo.png"
+          alt="MURAL Logo"
           className="mx-auto h-24 w-24"
           data-test="login-logo"
         />

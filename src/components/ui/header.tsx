@@ -18,7 +18,7 @@ export default function Header() {
                         src="/mural.png"
                         className="h-8 sm:h-10 md:h-12 selection:bg-none cursor-pointer"
                         draggable="false"
-                        alt="IFRO Events"
+                        alt="MURAL Logo"
                     />
                 </Link>
 

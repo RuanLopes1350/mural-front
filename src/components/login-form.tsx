@@ -31,8 +31,8 @@ export function LoginForm({
             {/* Logo */}
             <div className="mb-12 flex justify-center">
               <img
-                src="/ifro-events-icon.svg"
-                alt="IFRO EVENTS"
+                src="/mural.png"
+                alt="MURAL Logo"
                 className="w-3000 h-45"
               />
             </div>

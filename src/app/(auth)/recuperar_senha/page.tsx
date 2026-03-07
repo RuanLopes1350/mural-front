@@ -95,7 +95,7 @@ export default function RecuperarSenhaPage() {
                     </svg>
                     <span>Voltar para login</span>
                 </Link>
-                <img src="/ifro-events-icon.svg" alt="Ifro Events" className="mx-auto h-24 w-24" draggable='false' />
+                <img src="/mural-logo.png" alt="MURAL Logo" className="mx-auto h-24 w-24" draggable='false' />
 
                 <div className="text-center">
                     <h1 className="text-3xl font-bold text-gray-900" data-test="recover-title">Recuperar Senha</h1>
