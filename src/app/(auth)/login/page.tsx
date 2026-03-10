@@ -10,19 +10,19 @@ export default function LoginPage() {
 
   const { data: session, status } = useSession()
   const router = useRouter()
-  
+
   useEffect(() => {
     if (session?.user) {
       router.push("/meus_eventos");
     }
   }, [status, router]);
-  
+
   const { login, isLoading } = useLogin();
 
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
   const [remember, setRemember] = useState(true);
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await login({ email, senha, callbackUrl: "/meus_eventos", remember });
@@ -32,12 +32,14 @@ export default function LoginPage() {
     <div className="w-full max-w-md" data-test="login-container">
       <div className="bg-white rounded-lg shadow-xl pb-6 pl-6 pr-6 space-y-4" data-test="login-card">
 
-        <img
-          src="/mural-logo.png"
-          alt="MURAL Logo"
-          className="mx-auto h-24 w-24"
-          data-test="login-logo"
-        />
+        <div className="pt-6" data-test="login-logo-container">
+          <img
+            src="/mural-logo.png"
+            alt="MURAL Logo"
+            className="mx-auto h-24 w-24"
+            data-test="login-logo"
+          />
+        </div>
 
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-900" data-test="login-title">
