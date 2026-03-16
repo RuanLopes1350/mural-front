@@ -401,7 +401,7 @@ export default function EventosPage() {
 
                     { /* LOGO DO FSLAB */}
                     <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-10 lg:left-10 xl:bottom-12 xl:left-12 2xl:bottom-12 2xl:left-12 3xl:bottom-14 3xl:left-14 4xl:bottom-16 4xl:left-16">
-                        <img src="/logo_fslab.svg" alt="Logo FSLab" className="h-12 w-auto sm:h-14 md:h-16 lg:h-12 xl:h-14 2xl:h-16 3xl:h-20 4xl:h-24" />
+                        <img src="/logo_fslab.svg" alt="Logo FSLab" className="h-24 w-auto sm:h-26 md:h-26 lg:h-24 xl:h-26 2xl:h-28 3xl:h-32 4xl:h-36" />
                     </div>
 
                     {/* QR Code - Absolute dentro da barra lateral */}
