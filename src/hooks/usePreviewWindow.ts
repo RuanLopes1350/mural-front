@@ -1,61 +1,37 @@
 import { useState, useCallback } from "react";
 
-// Função auxiliar para converter URL (blob ou http) para Base64
-const urlToBase64 = async (url: string): Promise<string> => {
-  try {
-    if (url.startsWith('data:')) {
-      return url;
-    }
-
-    // Para blob URLs
-    if (url.startsWith('blob:')) {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    }
-
-    // Para URLs http/https 
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  } catch (error) {
-    console.warn('Falha ao converter imagem para base64:', url, error);
-    return url;
-  }
-};
-
 export function usePreviewWindow() {
   const [previewWindow, setPreviewWindow] = useState<Window | null>(null);
 
   const openPreview = useCallback(async (imageUrls?: string[]) => {
-    // Converte todas as imagens para Base64 antes de salvar
+    const STORAGE_KEY = 'preview-evento-blobs';
+
+    // Salva as URLs das imagens
     if (imageUrls && imageUrls.length > 0) {
       try {
-        const base64Images = await Promise.all(
-          imageUrls.map(url => urlToBase64(url))
-        );
-        localStorage.setItem('preview-evento-blobs', JSON.stringify(base64Images));
+        // Armazenamos apenas as URLs. 
+        // Nota: Blob URLs (blob:http://...) funcionam entre janelas da mesma origem.
+        // Convertê-las para Base64 era o que causava o estouro de cota (5MB limit).
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(imageUrls));
       } catch (error) {
-        console.error('Erro ao converter imagens para base64:', error);
-        localStorage.setItem('preview-evento-blobs', JSON.stringify(imageUrls));
+        console.error('Erro ao salvar URLs de preview no sessionStorage:', error);
+        
+        // Se ainda assim der erro de cota, tentamos limpar e salvar o mínimo
+        try {
+          sessionStorage.clear();
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(imageUrls));
+        } catch (retryError) {
+          console.error('Falha crítica de armazenamento:', retryError);
+          alert('O navegador atingiu o limite de memória para o preview. Tente usar menos imagens ou imagens menores.');
+        }
       }
     } else {
-      localStorage.removeItem('preview-evento-blobs');
+      sessionStorage.removeItem(STORAGE_KEY);
     }
 
     // Verifica se a janela já existe e está aberta
     if (previewWindow && !previewWindow.closed) {
-      // Se existe, apenas foca nela e força reload
+      // Se existe, apenas foca nela e força reload para ler o novo storage
       previewWindow.focus();
       previewWindow.location.reload();
     } else {

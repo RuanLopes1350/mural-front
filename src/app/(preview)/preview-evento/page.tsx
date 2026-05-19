@@ -30,7 +30,8 @@ export default function PreviewEvento() {
 
   const carregarDadosPreview = useCallback(() => {
     const dadosForm = localStorage.getItem("criar_evento_draft");
-    const blobUrlsStorage = localStorage.getItem("preview-evento-blobs");
+    // Agora lemos do sessionStorage para evitar estouro de cota do localStorage
+    const blobUrlsStorage = sessionStorage.getItem("preview-evento-blobs");
     const existingImagesStorage = localStorage.getItem("criar-evento-images");
 
     if (!dadosForm) {
